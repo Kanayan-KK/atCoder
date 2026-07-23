@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AtCoder: 型チェック",
+      "type": "npm",
+      "script": "typecheck",
+      "problemMatcher": "$tsc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "AtCoder: サンプルテスト",
+      "type": "shell",
+      "command": "npm test -- ${input:problem}",
+      "problemMatcher": []
+    },
+    {
+      "label": "AtCoder: デバッグビルド",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": "$tsc"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "problem",
+      "type": "promptString",
+      "description": "テストする問題ディレクトリ",
+      "default": "problems/practice-a"
+    }
+  ]
+}
