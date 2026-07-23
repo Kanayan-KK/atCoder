@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "strict": true,
-    "noEmitOnError": true,
-    "sourceMap": true,
+    "esModuleInterop": true,
+    "types": [
+      "node"
+    ],
     "skipLibCheck": true,
-    "types": ["node"]
-  },
-  "include": ["problems/**/*.ts"]
+    "noUncheckedIndexedAccess": false
+  }
 }
