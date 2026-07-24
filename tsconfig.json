@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "Bundler",
+    "verbatimModuleSyntax": true,
     "strict": true,
-    "esModuleInterop": true,
-    "types": [
-      "node"
-    ],
+    "noEmit": true,
     "skipLibCheck": true,
-    "noUncheckedIndexedAccess": false
-  }
+    "types": ["bun", "node"]
+  },
+  "include": ["problems/**/*.ts", "templates/**/*.ts"]
 }

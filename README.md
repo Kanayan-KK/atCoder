@@ -1,51 +1,51 @@
-# AtCoder TypeScript 環境
+# AtCoder TypeScript環境
 
-AtCoder の `TypeScript 5.9 (Node.js 22.19.0)` に合わせたローカル環境です。
-各問題の解答、問題リンク、公式サンプルを `problems` の中へまとめています。
+AtCoderの`TypeScript 5.9 (Bun 1.2.21)`に合わせた環境です。
+各問題の解答、問題リンク、公式サンプルを`problems`にまとめています。
 
 ## 初回準備
 
 ```powershell
-fnm install
-fnm use
-npm install
+& "$env:USERPROFILE\.bun\bin\bun.exe" install
 ```
+
+使用するBunのバージョンは`.bun-version`と`package.json`で`1.2.21`に固定しています。
 
 ## 問題を解く
 
-例として PracticeA を解く場合は、次のファイルを編集します。
-
-```text
-problems/practice-a/Main.ts
-```
+PracticeAの場合は`problems/practice-a/Main.ts`を編集します。
 
 全問題の型チェック:
 
 ```powershell
-npm run typecheck
+& "$env:USERPROFILE\.bun\bin\bun.exe" run typecheck
 ```
 
-PracticeA のサンプルテスト:
+PracticeAのサンプルテスト:
 
 ```powershell
-npm test -- problems/practice-a
+& "$env:USERPROFILE\.bun\bin\bun.exe" run test -- problems/practice-a
 ```
 
-サンプルテストは未回答の状態では失敗します。
-`Main.ts` に解答を実装してから使用してください。
-
-VS Code では `Ctrl+Shift+B` で全問題を型チェックできます。
+VS Codeでは`Ctrl+Shift+B`で全問題を型チェックできます。
 「タスクの実行」からサンプルテストを選ぶと、対象ディレクトリを入力できます。
 
-## デバッグ実行
+## F5デバッグ
 
-1. デバッグする問題の `Main.ts` をVS Codeで開く
-2. 停止したい行の左側をクリックしてブレークポイントを置く
-3. `F5` を押す
-4. 「サンプル01」または「手入力」を選ぶ
+1. デバッグする問題の`Main.ts`にブレークポイントを置く
+2. `F5`を押す
+3. 問題ディレクトリとサンプル番号を入力する
 
-「サンプル01」は同じ問題ディレクトリの `samples/01.in` を自動入力します。
-「手入力」はデバッグターミナルへ入力を貼り付け、最後に `Ctrl+Z`、`Enter` の順で入力を終了します。
+指定した問題の`Main.ts`がBunで直接実行され、指定したサンプルが自動入力されます。
+JavaScriptへの事前ビルドは行いません。
+
+F5には公式のBun VS Code拡張`oven.bun-vscode`が必要です。
+この環境にはインストール済みです。反映されない場合はVS Codeを再起動してください。
+
+## Webデバッガー
+
+VS Codeの「タスクの実行」から`AtCoder: Webデバッグ`を選び、問題ディレクトリとサンプル番号を入力します。
+ターミナルに表示された`https://debug.bun.sh/`のURLを開いてください。
 
 ## 新しい問題を追加する
 
@@ -59,10 +59,13 @@ problems/
       └─ 01.out
 ```
 
-`templates/Main.ts` を新しい問題ディレクトリへコピーして使用します。
-AtCoderへは対象問題の `Main.ts` の内容だけを提出します。
+`templates/Main.ts`を新しい問題ディレクトリへコピーします。
+AtCoderへは対象問題の`Main.ts`の内容だけを提出します。
 
 ## 注意
 
+各`Main.ts`は、F5デバッグ時だけ`ATCODER_INPUT_FILE`からサンプルを読みます。
+AtCoderではこの環境変数がないため、通常どおり標準入力を読みます。
+
 サンプルテストは出力を文字列として比較します。
-ABC085C のように正解が複数存在する問題では、正しい別解でもサンプル出力と異なると失敗します。
+ABC085Cのように正解が複数存在する問題では、正しい別解でもサンプル出力と異なると失敗します。

@@ -3,8 +3,12 @@
   "tasks": [
     {
       "label": "AtCoder: 型チェック",
-      "type": "npm",
-      "script": "typecheck",
+      "type": "shell",
+      "command": "C:\\Users\\glgln\\.bun\\bin\\bun.exe",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
       "problemMatcher": "$tsc",
       "group": {
         "kind": "build",
@@ -14,22 +18,36 @@
     {
       "label": "AtCoder: サンプルテスト",
       "type": "shell",
-      "command": "npm test -- ${input:problem}",
+      "command": "C:\\Users\\glgln\\.bun\\bin\\bun.exe",
+      "args": [
+        "scripts/test-samples.mjs",
+        "${input:problem}"
+      ],
       "problemMatcher": []
     },
     {
-      "label": "AtCoder: デバッグビルド",
-      "type": "npm",
-      "script": "build",
-      "problemMatcher": "$tsc"
+      "label": "AtCoder: Webデバッグ",
+      "type": "shell",
+      "command": "Get-Content -Raw '${workspaceFolder}\\${input:problem}\\samples\\${input:sample}.in' | & 'C:\\Users\\glgln\\.bun\\bin\\bun.exe' --inspect-brk '${workspaceFolder}\\${input:problem}\\Main.ts'",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
     }
   ],
   "inputs": [
     {
       "id": "problem",
       "type": "promptString",
-      "description": "テストする問題ディレクトリ",
+      "description": "対象問題ディレクトリ",
       "default": "problems/practice-a"
+    },
+    {
+      "id": "sample",
+      "type": "promptString",
+      "description": "サンプル番号",
+      "default": "01"
     }
   ]
 }

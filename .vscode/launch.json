@@ -2,23 +2,30 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "AtCoder: 現在の問題をデバッグ（サンプル01）",
-      "type": "node-terminal",
+      "name": "AtCoder: 問題とサンプルを選んでBunデバッグ",
+      "type": "bun",
       "request": "launch",
-      "preLaunchTask": "AtCoder: デバッグビルド",
-      "command": "Get-Content -Raw '${fileDirname}\\samples\\01.in' | node '${fileDirname}\\Main.js'",
-      "cwd": "${workspaceFolder}"
+      "program": "${workspaceFolder}/${input:problem}/Main.ts",
+      "cwd": "${workspaceFolder}/${input:problem}",
+      "runtime": "C:\\Users\\glgln\\.bun\\bin\\bun.exe",
+      "stopOnEntry": true,
+      "env": {
+        "ATCODER_INPUT_FILE": "${workspaceFolder}/${input:problem}/samples/${input:sample}.in"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "problem",
+      "type": "promptString",
+      "description": "対象問題ディレクトリ",
+      "default": "problems/practice-a"
     },
     {
-      "name": "AtCoder: 現在の問題をデバッグ（手入力）",
-      "type": "node",
-      "request": "launch",
-      "preLaunchTask": "AtCoder: デバッグビルド",
-      "program": "${fileDirname}/Main.js",
-      "cwd": "${fileDirname}",
-      "console": "integratedTerminal",
-      "sourceMaps": true,
-      "outFiles": ["${workspaceFolder}/problems/**/*.js"]
+      "id": "sample",
+      "type": "promptString",
+      "description": "サンプル番号",
+      "default": "01"
     }
   ]
 }

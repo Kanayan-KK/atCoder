@@ -12,30 +12,10 @@ if (!problemPath) {
 
 const problemDir = resolve(problemPath);
 const sourcePath = resolve(problemDir, "Main.ts");
-const outputPath = resolve(problemDir, "Main.js");
 const samplesDir = resolve(problemDir, "samples");
 
 if (!existsSync(sourcePath) || !existsSync(samplesDir)) {
   console.error(`${problemPath} に Main.ts または samples がありません。`);
-  process.exit(1);
-}
-
-// AtCoder と同じ条件で対象問題だけコンパイルする
-const compilerPath = resolve("node_modules/typescript/bin/tsc");
-const compile = spawnSync(process.execPath, [
-  compilerPath,
-  sourcePath,
-  "--target",
-  "ESNext",
-  "--moduleResolution",
-  "nodenext",
-  "--module",
-  "NodeNext",
-  "--noEmitOnError",
-], { encoding: "utf8" });
-
-if (compile.status !== 0) {
-  console.error(compile.stdout || compile.stderr);
   process.exit(1);
 }
 
@@ -53,7 +33,7 @@ for (const inputName of cases) {
   const caseName = inputName.slice(0, -3);
   const input = readFileSync(resolve(samplesDir, inputName), "utf8");
   const expected = readFileSync(resolve(samplesDir, `${caseName}.out`), "utf8");
-  const result = spawnSync(process.execPath, [outputPath], {
+  const result = spawnSync(process.execPath, [sourcePath], {
     input,
     encoding: "utf8",
   });

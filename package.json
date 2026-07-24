@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "description": "AtCoder TypeScript workspace",
+  "packageManager": "bun@1.2.21",
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "test": "node scripts/test-samples.mjs"
+    "typecheck": "C:/Users/glgln/.bun/bin/bun.exe node_modules/typescript/bin/tsc --noEmit",
+    "test": "C:/Users/glgln/.bun/bin/bun.exe scripts/test-samples.mjs"
   },
   "engines": {
-    "node": "22.19.0"
+    "bun": "1.2.21"
   },
   "devDependencies": {
+    "@types/bun": "1.2.21",
     "@types/node": "22.18.1",
     "typescript": "5.9.2"
   }
