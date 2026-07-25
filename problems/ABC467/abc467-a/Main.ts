@@ -5,4 +5,5 @@ const inputSource = process.env.ATCODER_INPUT_FILE ?? 0;
 const input = readFileSync(inputSource, "utf8").trim().split(/\s+/);
 
 // ここに解答を実装する
-
+const [H, W] = input.map(Number);
+console.log(W * 100 * 100 >= 25 * H * H ? "Yes" : "No")
